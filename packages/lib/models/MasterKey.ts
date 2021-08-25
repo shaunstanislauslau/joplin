@@ -29,8 +29,8 @@ export default class MasterKey extends BaseItem {
 		// return this.modelSelectOne('SELECT * FROM master_keys WHERE created_time >= (SELECT max(created_time) FROM master_keys)');
 	}
 
-	static allWithoutEncryptionMethod(masterKeys: MasterKeyEntity[], method: number) {
-		return masterKeys.filter(m => m.encryption_method !== method);
+	static allWithoutEncryptionMethod(masterKeys: MasterKeyEntity[], methods: number[]) {
+		return masterKeys.filter(m => !methods.includes(m.encryption_method));
 	}
 
 	public static async all(): Promise<MasterKeyEntity[]> {
